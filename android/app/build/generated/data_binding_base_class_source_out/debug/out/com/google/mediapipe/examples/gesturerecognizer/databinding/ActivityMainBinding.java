@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.mediapipe.examples.gesturerecognizer.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -19,10 +20,16 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final DrawerLayout rootView;
 
   @NonNull
   public final FragmentContainerView fragmentContainer;
+
+  @NonNull
+  public final DrawerLayout myDrawerLayout;
+
+  @NonNull
+  public final NavigationView navView;
 
   @NonNull
   public final BottomNavigationView navigation;
@@ -33,11 +40,14 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final View view;
 
-  private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull FragmentContainerView fragmentContainer, @NonNull BottomNavigationView navigation,
+  private ActivityMainBinding(@NonNull DrawerLayout rootView,
+      @NonNull FragmentContainerView fragmentContainer, @NonNull DrawerLayout myDrawerLayout,
+      @NonNull NavigationView navView, @NonNull BottomNavigationView navigation,
       @NonNull Toolbar toolbar, @NonNull View view) {
     this.rootView = rootView;
     this.fragmentContainer = fragmentContainer;
+    this.myDrawerLayout = myDrawerLayout;
+    this.navView = navView;
     this.navigation = navigation;
     this.toolbar = toolbar;
     this.view = view;
@@ -45,7 +55,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -76,6 +86,14 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      DrawerLayout myDrawerLayout = (DrawerLayout) rootView;
+
+      id = R.id.nav_view;
+      NavigationView navView = ViewBindings.findChildViewById(rootView, id);
+      if (navView == null) {
+        break missingId;
+      }
+
       id = R.id.navigation;
       BottomNavigationView navigation = ViewBindings.findChildViewById(rootView, id);
       if (navigation == null) {
@@ -94,8 +112,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, fragmentContainer, navigation,
-          toolbar, view);
+      return new ActivityMainBinding((DrawerLayout) rootView, fragmentContainer, myDrawerLayout,
+          navView, navigation, toolbar, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -26,18 +26,18 @@
 26
 27    <!-- Enable instant app support -->
 28    <dist:module dist:instant="true" />
-28-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:22:5-40
-28-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:22:18-37
+28-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:22:5-40
+28-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:22:18-37
 29
 30    <!-- Declare features -->
 31    <uses-feature android:name="android.hardware.camera" />
-31-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:25:5-60
-31-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:25:19-57
+31-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:25:5-60
+31-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:25:19-57
 32
 33    <!-- Declare permissions -->
 34    <uses-permission android:name="android.permission.CAMERA" />
-34-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:28:5-65
-34-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:28:22-62
+34-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:28:5-65
+34-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:28:22-62
 35
 36    <permission
 36-->[androidx.core:core:1.13.1] C:\Users\user\.gradle\caches\transforms-3\995e186fadfe58ec4da2accabbe1f240\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
@@ -58,50 +58,50 @@
 43-->[com.google.android.datatransport:transport-backend-cct:3.1.0] C:\Users\user\.gradle\caches\transforms-3\fe13523a260e367718ef7b5840792f6b\transformed\transport-backend-cct-3.1.0\AndroidManifest.xml:26:22-64
 44
 45    <application
-45-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:30:5-54:19
+45-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:30:5-54:19
 46        android:allowBackup="true"
-46-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:31:9-35
+46-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:31:9-35
 47        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 47-->[androidx.core:core:1.13.1] C:\Users\user\.gradle\caches\transforms-3\995e186fadfe58ec4da2accabbe1f240\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 48        android:debuggable="true"
 49        android:extractNativeLibs="false"
 50        android:icon="@mipmap/ic_launcher"
-50-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:32:9-43
+50-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:32:9-43
 51        android:label="@string/app_name"
-51-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:33:9-41
+51-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:33:9-41
 52        android:roundIcon="@mipmap/ic_launcher_round"
-52-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:34:9-54
+52-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:34:9-54
 53        android:supportsRtl="true"
-53-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:35:9-35
+53-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:35:9-35
 54        android:taskAffinity=""
-54-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:36:9-32
+54-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:36:9-32
 55        android:testOnly="true"
 56        android:theme="@style/Theme.GestureRecognizer" >
-56-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:37:9-55
+56-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:37:9-55
 57        <activity
-57-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:40:9-53:20
+57-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:40:9-53:20
 58            android:name="com.google.mediapipe.examples.gesturerecognizer.MainActivity"
-58-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:41:13-41
+58-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:41:13-41
 59            android:exported="true" >
-59-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:42:13-36
+59-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:42:13-36
 60            <intent-filter>
-60-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:43:13-47:29
+60-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:43:13-47:29
 61                <action android:name="android.intent.action.MAIN" />
-61-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:44:17-69
-61-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:44:25-66
+61-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:44:17-69
+61-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:44:25-66
 62
 63                <category android:name="android.intent.category.LAUNCHER" />
-63-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:46:17-77
-63-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:46:27-74
+63-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:46:17-77
+63-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:46:27-74
 64            </intent-filter>
 65
 66            <!-- Declare notch support -->
 67            <meta-data
-67-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:50:13-52:40
+67-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:50:13-52:40
 68                android:name="android.notch_support"
-68-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:51:17-53
+68-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:51:17-53
 69                android:value="true" />
-69-->D:\github_project\Independent-Study\android\app\src\main\AndroidManifest.xml:52:17-37
+69-->C:\Users\user\Desktop\Independent-Study-\android\app\src\main\AndroidManifest.xml:52:17-37
 70        </activity>
 71
 72        <uses-library

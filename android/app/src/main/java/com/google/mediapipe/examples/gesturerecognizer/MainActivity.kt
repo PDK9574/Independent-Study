@@ -16,13 +16,23 @@
 package com.google.mediapipe.examples.gesturerecognizer
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import com.google.mediapipe.examples.gesturerecognizer.databinding.ActivityMainBinding
+import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentA
+import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentB
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
     private lateinit var activityMainBinding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 
@@ -37,11 +47,46 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.navigation.setupWithNavController(navController)
         activityMainBinding.navigation.setOnNavigationItemReselectedListener {
             // ignore the reselection
+            setContentView(R.layout.activity_main)
+
+            drawerLayout = findViewById(R.id.my_drawer_layout)
+            val toolbar: Toolbar = findViewById(R.id.toolbar)
+            setSupportActionBar(toolbar)
+
+            navigationView = findViewById(R.id.nav_view)
+            navigationView.setNavigationItemSelectedListener(this)
+
+            val toggle = ActionBarDrawerToggle(
+                this, drawerLayout, toolbar,
+                R.string.nav_open, R.string.nav_close
+            )
+            drawerLayout.addDrawerListener(toggle)
+            toggle.syncState()
+
+            if (savedInstanceState == null) {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentA()).commit()
+                navigationView.setCheckedItem(R.id.fragment_a)
+            }
         }
+
     }
 
     override fun onBackPressed() {
         finish()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            R.id.fragment_a -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentA()).commit()
+            }
+            R.id.fragment_b -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentB()).commit()
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
 }

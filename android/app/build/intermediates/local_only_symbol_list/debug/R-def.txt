@@ -54,6 +54,7 @@ id inference_time_label
 id inference_time_val
 id my_drawer_layout
 id nav_graph
+id nav_home
 id nav_view
 id navigation
 id overlay
@@ -81,11 +82,11 @@ layout fragment_a
 layout fragment_b
 layout fragment_camera
 layout fragment_gallery
+layout header
 layout info_bottom_sheet
 layout item_gesture_recognizer_result
-layout other_button
 menu menu_bottom_nav
-menu navigation_menu
+menu test
 mipmap ic_launcher
 mipmap ic_launcher_round
 navigation nav_graph

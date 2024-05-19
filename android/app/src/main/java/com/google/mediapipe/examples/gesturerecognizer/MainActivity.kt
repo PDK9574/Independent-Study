@@ -29,12 +29,19 @@ import com.google.android.material.navigation.NavigationView
 import com.google.mediapipe.examples.gesturerecognizer.databinding.ActivityMainBinding
 import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentA
 import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentB
+import android.content.Intent
+import android.net.Uri
+import android.view.Menu
+import android.widget.TextView
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var activityMainBinding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var toolbar: Toolbar
+    private lateinit var menu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,47 +53,57 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = navHostFragment.navController
         activityMainBinding.navigation.setupWithNavController(navController)
         activityMainBinding.navigation.setOnNavigationItemReselectedListener {
-            // ignore the reselection
-            setContentView(R.layout.activity_main)
-
-            drawerLayout = findViewById(R.id.my_drawer_layout)
-            val toolbar: Toolbar = findViewById(R.id.toolbar)
-            setSupportActionBar(toolbar)
-
-            navigationView = findViewById(R.id.nav_view)
-            navigationView.setNavigationItemSelectedListener(this)
-
-            val toggle = ActionBarDrawerToggle(
-                this, drawerLayout, toolbar,
-                R.string.nav_open, R.string.nav_close
-            )
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-
-            if (savedInstanceState == null) {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentA()).commit()
-                navigationView.setCheckedItem(R.id.fragment_a)
-            }
         }
+        drawerLayout = findViewById(R.id.my_drawer_layout)
+        navigationView = findViewById(R.id.nav_view)
+        toolbar = findViewById(R.id.toolbar)
+
+        // Navigation drawer
+        navigationView.bringToFront()
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.nav_open, R.string.nav_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        navigationView.setNavigationItemSelectedListener(this)
+        navigationView.setCheckedItem(R.id.nav_home)
+
+        // Show or hide Items in navigation drawer
 
     }
 
     override fun onBackPressed() {
         finish()
     }
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.test, menu)
+        return true
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
+            R.id.nav_home -> {
+                openWebPage("http://www.example.com/settings2")
+            }
             R.id.fragment_a -> {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentA()).commit()
+                openWebPage("http://www.example.com/settings2")
             }
             R.id.fragment_b -> {
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FragmentB()).commit()
+                openWebPage("http://www.example.com/settings2")
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun openWebPage(url: String) {
+        val webpage: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
+
     }
 
 }

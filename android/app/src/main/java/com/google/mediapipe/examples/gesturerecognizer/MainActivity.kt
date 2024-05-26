@@ -15,6 +15,7 @@
  */
 package com.google.mediapipe.examples.gesturerecognizer
 
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -27,12 +28,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.mediapipe.examples.gesturerecognizer.databinding.ActivityMainBinding
-import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentA
-import com.google.mediapipe.examples.gesturerecognizer.fragment.FragmentB
 import android.content.Intent
 import android.net.Uri
 import android.view.Menu
-import android.widget.TextView
+import android.content.Context
+import android.view.View
+import com.google.mediapipe.examples.gesturerecognizer.fragment.CameraFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
@@ -42,6 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val viewModel: MainViewModel by viewModels()
     private lateinit var toolbar: Toolbar
     private lateinit var menu: Menu
+    private val mContext: Context = this
+    private val url = "http://www.google.com"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,9 +72,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
         navigationView.setCheckedItem(R.id.nav_home)
 
-        // Show or hide Items in navigation drawer
-
     }
+
 
     override fun onBackPressed() {
         finish()
@@ -84,26 +86,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val id = item.itemId
         when (id) {
             R.id.nav_home -> {
-                openWebPage("http://www.example.com/settings2")
+                openWebPage("http://www.google.com")
             }
             R.id.fragment_a -> {
-                openWebPage("http://www.example.com/settings2")
+                openWebPage("https://special.moe.gov.tw/signlanguage/basis/detail/7c338ab6-87a9-46cc-a50f-34b82b4dac8a")
             }
             R.id.fragment_b -> {
-                openWebPage("http://www.example.com/settings2")
+                openWebPage("https://twtsl.ccu.edu.tw/TSL/")
             }
+
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
     private fun openWebPage(url: String) {
         val webpage: Uri = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, webpage)
-        if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
-        }
-
     }
 
 }

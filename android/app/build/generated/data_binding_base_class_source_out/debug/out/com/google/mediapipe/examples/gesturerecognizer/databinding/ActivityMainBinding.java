@@ -4,6 +4,7 @@ package com.google.mediapipe.examples.gesturerecognizer.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -21,6 +22,9 @@ import java.lang.String;
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   private final DrawerLayout rootView;
+
+  @NonNull
+  public final ImageButton cameraSwitchButton;
 
   @NonNull
   public final FragmentContainerView fragmentContainer;
@@ -41,10 +45,11 @@ public final class ActivityMainBinding implements ViewBinding {
   public final View view;
 
   private ActivityMainBinding(@NonNull DrawerLayout rootView,
-      @NonNull FragmentContainerView fragmentContainer, @NonNull DrawerLayout myDrawerLayout,
-      @NonNull NavigationView navView, @NonNull BottomNavigationView navigation,
-      @NonNull Toolbar toolbar, @NonNull View view) {
+      @NonNull ImageButton cameraSwitchButton, @NonNull FragmentContainerView fragmentContainer,
+      @NonNull DrawerLayout myDrawerLayout, @NonNull NavigationView navView,
+      @NonNull BottomNavigationView navigation, @NonNull Toolbar toolbar, @NonNull View view) {
     this.rootView = rootView;
+    this.cameraSwitchButton = cameraSwitchButton;
     this.fragmentContainer = fragmentContainer;
     this.myDrawerLayout = myDrawerLayout;
     this.navView = navView;
@@ -80,6 +85,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.camera_switch_button;
+      ImageButton cameraSwitchButton = ViewBindings.findChildViewById(rootView, id);
+      if (cameraSwitchButton == null) {
+        break missingId;
+      }
+
       id = R.id.fragment_container;
       FragmentContainerView fragmentContainer = ViewBindings.findChildViewById(rootView, id);
       if (fragmentContainer == null) {
@@ -112,8 +123,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((DrawerLayout) rootView, fragmentContainer, myDrawerLayout,
-          navView, navigation, toolbar, view);
+      return new ActivityMainBinding((DrawerLayout) rootView, cameraSwitchButton, fragmentContainer,
+          myDrawerLayout, navView, navigation, toolbar, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

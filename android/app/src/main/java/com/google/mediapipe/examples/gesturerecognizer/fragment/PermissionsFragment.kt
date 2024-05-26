@@ -89,4 +89,8 @@ class PermissionsFragment : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         }
     }
+
+
+
+
 }

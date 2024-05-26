@@ -32,12 +32,5 @@
         android:icon="@drawable/ic_baseline_photo_library_24"
         android:title="@string/menu_gallery"
         android:visible="true" />
-    <item
-        android:id="@id/gallery_website"
-        android:checkable="false"
-        android:enabled="true"
-        android:icon="@android:drawable/alert_dark_frame"
-        android:title="@string/gallery_website"
-        android:visible="true" />
 
 </menu>

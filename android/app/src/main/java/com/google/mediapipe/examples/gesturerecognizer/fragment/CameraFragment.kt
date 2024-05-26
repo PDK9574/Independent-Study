@@ -16,8 +16,17 @@
 package com.google.mediapipe.examples.gesturerecognizer.fragment
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Matrix
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +38,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.mediapipe.examples.gesturerecognizer.GestureRecognizerHelper
@@ -40,6 +50,12 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import com.google.mediapipe.examples.gesturerecognizer.databinding.CameraUiContainerBinding
+import com.google.mediapipe.framework.image.BitmapImageBuilder
+import com.google.mediapipe.framework.image.MPImage
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+
 
 class CameraFragment : Fragment(),
     GestureRecognizerHelper.GestureRecognizerListener {
@@ -49,10 +65,10 @@ class CameraFragment : Fragment(),
     }
 
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
-
+    private var displayId: Int = -1
     private val fragmentCameraBinding
         get() = _fragmentCameraBinding!!
-
+    private var cameraUiContainerBinding: CameraUiContainerBinding? = null
     private lateinit var gestureRecognizerHelper: GestureRecognizerHelper
     private val viewModel: MainViewModel by activityViewModels()
     private var defaultNumResults = 1
@@ -65,7 +81,7 @@ class CameraFragment : Fragment(),
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
-    private var cameraFacing = CameraSelector.LENS_FACING_FRONT
+    private var cameraFacing = CameraSelector.LENS_FACING_BACK
 
     /** Blocking ML operations are performed using this executor */
     private lateinit var backgroundExecutor: ExecutorService
@@ -138,7 +154,15 @@ class CameraFragment : Fragment(),
         // Wait for the views to be properly laid out
         fragmentCameraBinding.viewFinder.post {
             // Set up the camera and its use cases
-            setUpCamera()
+            displayId = fragmentCameraBinding.viewFinder.display.displayId
+
+            // Build UI controls
+            updateCameraUi()
+
+            // Set up the camera and its use cases
+            lifecycleScope.launch {
+                setUpCamera()
+            }
         }
 
         // Create the Hand Gesture Recognition Helper that will handle the
@@ -341,9 +365,15 @@ class CameraFragment : Fragment(),
     }
 
     private fun recognizeHand(imageProxy: ImageProxy) {
-        gestureRecognizerHelper.recognizeLiveStream(
-            imageProxy = imageProxy,
-        )
+        if (CameraSelector.LENS_FACING_FRONT == cameraFacing) {
+            gestureRecognizerHelper.recognizeLiveStream(
+                imageProxy = imageProxy,
+            )
+        } else {
+            gestureRecognizerHelper.recognizeLiveStream2(
+                imageProxy = imageProxy,
+            )
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -400,4 +430,43 @@ class CameraFragment : Fragment(),
             }
         }
     }
+
+    private fun updateCameraUi() {
+
+        // Remove previous UI if any
+        cameraUiContainerBinding?.root?.let {
+            fragmentCameraBinding.root.removeView(it)
+        }
+
+        cameraUiContainerBinding = CameraUiContainerBinding.inflate(
+            LayoutInflater.from(requireContext()),
+            fragmentCameraBinding.root,
+            true
+        )
+
+
+        // Listener for button used to capture photo
+
+        // Setup for button used to switch cameras
+        cameraUiContainerBinding?.cameraSwitchButton?.let {
+
+            // Disable the button until the camera is set up
+
+
+            // Listener for button used to switch cameras. Only called if the button is enabled
+            it.setOnClickListener {
+                cameraFacing = if (CameraSelector.LENS_FACING_FRONT == cameraFacing) {
+                    CameraSelector.LENS_FACING_BACK
+                } else {
+                    CameraSelector.LENS_FACING_FRONT
+                }
+                // Re-bind use cases to update selected camera
+                bindCameraUseCases()
+            }
+        }
+
+        // Listener for button used to view the most recent phot
+    }
+
+
 }

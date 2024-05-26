@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn ="navigation_view">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="home" />
+            android:icon="@drawable/baseline_home_24"
+            android:title="首頁" />
         <item
             android:id="@+id/fragment_a"
-            android:title="My_Account" />
+            android:icon="@drawable/search"
+            android:title="基礎手語查看"/>
         <item
             android:id="@+id/fragment_b"
-            android:title="Settings" />
+            android:icon="@drawable/hand"
+            android:title="手語辭典查詢"/>
         <item
-            android:id="@+id/fragment_c"
-            android:title="Settings2" />
+            android:id="@+id/switchCamera"
+            android:icon="@drawable/hand"
+            android:title="切換鏡頭" />
     </group>
 </menu>

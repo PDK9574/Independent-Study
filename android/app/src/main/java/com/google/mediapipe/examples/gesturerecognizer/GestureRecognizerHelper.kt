@@ -153,6 +153,46 @@ class GestureRecognizerHelper(
         recognizeAsync(mpImage, frameTime)
     }
 
+    fun recognizeLiveStream2(
+        imageProxy: ImageProxy,
+    ) {
+        val frameTime = SystemClock.uptimeMillis()
+
+        // Copy out RGB bits from the frame to a bitmap buffer
+        val bitmapBuffer = Bitmap.createBitmap(
+            imageProxy.width, imageProxy.height, Bitmap.Config.ARGB_8888
+        )
+        imageProxy.use { bitmapBuffer.copyPixelsFromBuffer(imageProxy.planes[0].buffer) }
+        imageProxy.close()
+
+        val matrix = Matrix().apply {
+            // Rotate the frame received from the camera to be in the same direction as it'll be shown
+            postRotate(imageProxy.imageInfo.rotationDegrees.toFloat())
+
+            // flip image since we only support front camera
+            postScale(
+                1f, 1f, imageProxy.width.toFloat(), imageProxy.height.toFloat()
+            )
+        }
+
+        // Rotate bitmap to match what our model expects
+        val rotatedBitmap = Bitmap.createBitmap(
+            bitmapBuffer,
+            0,
+            0,
+            bitmapBuffer.width,
+            bitmapBuffer.height,
+            matrix,
+            true
+        )
+
+        // Convert the input Bitmap object to an MPImage object to run inference
+        val mpImage = BitmapImageBuilder(rotatedBitmap).build()
+
+        recognizeAsync(mpImage, frameTime)
+    }
+
+
     // Run hand gesture recognition using MediaPipe Gesture Recognition API
     @VisibleForTesting
     fun recognizeAsync(mpImage: MPImage, frameTime: Long) {
@@ -340,6 +380,7 @@ class GestureRecognizerHelper(
     )
 
     interface GestureRecognizerListener {
+
         fun onError(error: String, errorCode: Int = OTHER_ERROR)
         fun onResults(resultBundle: ResultBundle)
     }

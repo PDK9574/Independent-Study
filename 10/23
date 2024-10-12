@@ -1,0 +1,20 @@
+資料夾名稱	程式名稱	功能說明
+py	init_db	初始化 SQLite 資料庫
+	Flask	Flask 應用設置
+	Yolo	YOLO 模型配置
+	os.makedirs	創建上傳、結果和臨時資料夾
+	ALLOWED_EXTENSIONS	允許的文件類型
+	image_to_base64	將圖片轉換為 base64 格式
+	log_recognition	記錄 YOLO 檢測結果到資料庫
+	pigeon_wing_var	定義模糊變數和隸屬函數
+	detect_objects
+	OLO 進行物體檢測並返回檢測到的特徵值
+	serve_result_image	路由來服務結果圖片
+	upload_file_route	處理圖片上傳並進行物體檢測
+	avg_pigeon_wing	如果所有特徵都檢測到，進行分析
+	input_missing
+	新增路由來處理缺失特徵的輸入
+	view_history	顯示歷史紀錄
+	share_result	分享結果的頁面
+	Pyngork1	設置ngork
+	main	啟動應用

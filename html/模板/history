@@ -83,7 +83,7 @@
                         <li><a href="app-email.html"><i class="ti-email"></i> Email</a></li>
                         <li><a href="app-profile.html"><i class="ti-user"></i> Profile</a></li>
                         <li><a href="app-widget-card.html"><i class="ti-layout-grid2-alt"></i> Widget</a></li>
-                        <li class="label">Features</li>
+                        
                         ss="sidebar-sub-toggle"><i class="ti-panel"></i> Components備用二 <span class="sidebar-collapse-icon ti-angle-down"></span></a>
                             <ul>
                                 <li><a href="uc-calendar.html">Calendar</a></li>
